@@ -1,0 +1,20 @@
+{
+  "name": "rogue",
+  "version": "1.0.0",
+  "main": "sketch.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "p5": "^1.11.2",
+    "seedrandom": "^3.0.5"
+  },
+  "devDependencies": {
+    "@parcel/transformer-raw": "^2.13.3",
+    "parcel": "^2.13.3"
+  }
+}

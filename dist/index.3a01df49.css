@@ -1,0 +1,14 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+@font-face {
+  font-family: ModerDOS;
+  src: url("ModerDOS437.274acd63.ttf") format("truetype");
+}
+/*# sourceMappingURL=index.3a01df49.css.map */

@@ -1,0 +1,13 @@
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+canvas {
+  display: block;
+}
+
+@font-face {
+  font-family: "ModerDOS";
+  src: url("./assets/fonts/ModerDOS437.ttf") format("truetype");
+}
