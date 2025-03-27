@@ -45,7 +45,7 @@ export default class Chunk extends TileObject {
 
         for (let localY = 0; localY < this.size; localY++) {
             for (let localX = 0; localX < this.size; localX++) {
-                if (!filterList.includes(this.tilemap.getTile(localX, localY))) {
+                if (!filterList.includes(this.tilemap.getTileId(localX, localY))) {
                     validCoords.push([localX, localY]);
                 }
             }

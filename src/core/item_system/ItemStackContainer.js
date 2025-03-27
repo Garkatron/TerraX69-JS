@@ -13,6 +13,11 @@ export default class ItemStackContainer {
         this.onContentModified.emit(this.getAsArray2D(20));
     }
 
+    getContent() {
+        this._refresh();
+        return this.itemStacks;
+    }
+
     dropQuantity(slot = 0, quantity = 1) {
         this._refresh();
         const itemStack = this.getFromSlot(slot);

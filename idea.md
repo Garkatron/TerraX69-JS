@@ -1,1 +1,0 @@
-AL golpear activar habilidades menu por turnos

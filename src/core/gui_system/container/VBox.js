@@ -6,7 +6,6 @@ export default class VBox extends GObject {
         
     }
 
-
     draw() {
         this.p.strokeWeight(2);
         this.p.stroke("black");

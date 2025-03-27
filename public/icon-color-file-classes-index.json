@@ -1,0 +1,6 @@
+{
+    ".js": { "class": "js-file", "icon": "./crabed/src/assets/js-icon.png" },
+    ".rs": { "class": "rs-file", "icon": "/icons/rs-icon.png" },
+    ".c": { "class": "c-file", "icon": "/icons/c-icon.png" },
+    ".css": { "class": "css-file", "icon": "/icons/css-icon.png" }
+}

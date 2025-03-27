@@ -4,6 +4,10 @@ export default class Util {
     }
 
 
+    static randi(min, max) {
+        return Math.floor(Math.random() * (max - min) + min);
+    }
+
     static posGlobalToChunkLocal(x, y, chunk) {        
         const localX = x - chunk.x * chunk.size;
         const localY = y - chunk.y * chunk.size;        

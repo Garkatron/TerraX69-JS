@@ -33,16 +33,17 @@ export default class Button extends GObject {
 
         this.p.fill(this.bgColor);
         this.p.rect(this.x, this.y, this.w, this.h, 2);
-
+    
         if (this.label) {
             this.label.x = this.x + (this.w / 4);
             this.label.y = this.y + (this.h / 4)-5;
-            this.label.setAlign(this.p.CENTER);
             this.label.draw();
         }
     }
 
-    update() {}
+    update() {
+        
+    }
 
     isHover(mx, my) {
         return mx > this.x && mx < this.x + this.w && my > this.y && my < this.y + this.h;

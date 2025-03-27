@@ -59,7 +59,7 @@ export default class StartMenu extends Scene {
     }
     
     draw() {
-        this.box.draw()
+        //this.box.draw()
         //this.sceneManager.draw();
     }
 

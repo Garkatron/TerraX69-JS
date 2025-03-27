@@ -5,6 +5,7 @@ export const onMousePressed = new Signal();
 export const onMouseReleased = new Signal();
 export const onMouseClicked = new Signal();
 export const onKeyReleased = new Signal();
+export const onKeyPressed = new Signal();
 export const onMouseWheelUp = new Signal();
 export const onMouseWheelDown = new Signal();
 
@@ -24,7 +25,12 @@ export default class Engine {
             p.mouseClicked = () => this._eMouseClicked(p);
             p.keyReleased = () => this._eKeyReleased(p);
             p.mouseWheel = (event) => this.mouseWheel(event);
+            p.keyPressed = (event) => this._eKeyPressed(event);
         });
+    }
+
+    _eKeyPressed(event) {
+        onKeyPressed.emit(event)
     }
 
     mouseWheel(event) {

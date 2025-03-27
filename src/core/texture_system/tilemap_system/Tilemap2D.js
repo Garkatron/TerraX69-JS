@@ -9,16 +9,18 @@ export default class Tilemap2D extends Object2D {
 
         this.tiles = map;
         this.textures = this._loadAtlas(imageResources);
-        this._process_map(map);
+        if (map != null) {
+            this._process_map(this.tiles);
+        }
     }
 
     _loadAtlas(imageResources) {
-        const atlas = {};
-        for (const [key, value] of Object.entries(imageResources)) {
-            atlas[key] = new Tile(value); 
-        }
-        return atlas;
+        return Object.entries(imageResources).reduce((atlas, [key, value]) => {
+            atlas[key] = new Tile(value);
+            return atlas;
+        }, {});
     }
+
 
     _process_map(map) {
         if (!map) {
@@ -53,7 +55,14 @@ export default class Tilemap2D extends Object2D {
         });
     }
 
-    setTile(x, y, type) {
+    update() {
+        Object.values(this.textures).forEach((e)=>{
+            e.update();
+        });
+        
+    }
+
+    setTile(x, y, type) {        
         this.tiles[y][x] = this.textures[type].setX(x).setY(y);
     }
 
@@ -61,13 +70,12 @@ export default class Tilemap2D extends Object2D {
         return this.tiles[y]?.[x] || null;
     }
 
-    getTileId(x, y) {
-        return this.tiles[y]?.[x].id || null;
-    }
 
+    getTileId(x, y) {
+        return this.tiles[y]?.[x]?.id || null;
+    }
     getTileMetaData(x, y) {
-        let tile = this.getTile(x, y);
-        return tile?.metaData || null;
+        return this.getTile(x, y)?.metaData || null;
     }
 
     setTileMetaData(x, y, metaData) {
@@ -84,6 +92,6 @@ export default class Tilemap2D extends Object2D {
         }
     }
 
-   
-    
+
+
 }

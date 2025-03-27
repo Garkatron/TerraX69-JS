@@ -37,6 +37,7 @@ export default class Hud extends Scene {
             new Text(this.p, "Name: ?").setId("name"),
             new Text(this.p, "Life: 100").setId("life"),
             new Text(this.p, "Time: 0").setId("time"),
+            new Text(this.p, "Shift: 0").setId("shift"),
             new GObject(this.p, 0, 20).setId("spacer"),
             new Text(this.p, "Coords: 0x0").setId("coords"),
             new Button(this.p, "Inventory", 200, 20).setOnClick(() => {
@@ -75,6 +76,7 @@ export default class Hud extends Scene {
         this.box.getById("name").setText("Name: " + this.global.player.name);
         this.box.getById("life").setText("Life: " + this.global.player.life);
         this.box.getById("time").setText("Time: " + pastTime + "s");
+        this.box.getById("shift").setText("Shift: " + this.global.player.shiftManager.shift);
         this.box.getById("coords").setText(`Coords: ${this.global.player.x}x${this.global.player.y}`);
     }
 

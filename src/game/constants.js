@@ -16,19 +16,34 @@ export const STONE_FLOOR = "STONE_FLOOR";
 export const CITY = "CITY";
 export const TREE = "TREE";
 export const BUSH = "BUSH";
+export const CSFLOWER = "CSFLOWER";
 
 export const DIRECTION = {
     NORTH: "NORTH",
     SOUTH: "SOUTH",
     EAST: "EAST",
     WEST: "WEST",
+    NONE: "NONE"
 }
+
+export const getOppositeDirection = (direction) => {
+    const opposite = {
+        [DIRECTION.NORTH]: DIRECTION.SOUTH,
+        [DIRECTION.SOUTH]: DIRECTION.NORTH,
+        [DIRECTION.EAST]: DIRECTION.WEST,
+        [DIRECTION.WEST]: DIRECTION.EAST,
+        [DIRECTION.NONE]: DIRECTION.NONE
+    };
+    
+    return opposite[direction] || DIRECTION.NONE;
+};
 
 export const ARROW = {
     NORTH: "ARROW_UP",
     SOUTH: "ARROW_DOWN",
     EAST: "ARROW_RIGHT",
     WEST: "ARROW_LEFT",
+    NONE: "NONE"
 };
 
 
@@ -116,6 +131,16 @@ export const BUSH_OBSTACLE = [
     MOUNTAIN,
     CAVE,
     CITY,
+    TREE
+]
+
+export const CSFLOWER_OBSTACLE = [
+    WATER,
+    MOUNTAIN,
+    MOUNTAIN,
+    CAVE,
+    CITY,
+    BUSH,
     TREE
 ]
 

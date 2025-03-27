@@ -18,7 +18,11 @@ class Object2D {
       this.y = y;
       return this;
   }
-
+  
+  modify(f=(instance)=>{}) {
+    f(this);
+    return this;
+  }
 }
 
 Object2D = Drawable(Updatable(Object2D));

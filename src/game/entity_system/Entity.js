@@ -2,11 +2,13 @@ import TileObject from './../../game/object_system/TileObject';
 import ItemStackContainer from './../../core/item_system/ItemStackContainer';
 import Global from '../Global';
 import Sprite2D from './../../core/texture_system/Sprite2D';
-import { ARROW, DIRECTION, TILE_SIZE } from '../constants';
+import { ARROW, DIRECTION, TILE_SIZE, OBSTACLE } from '../constants';
 import Util from '../../core/util/Util';
+import Signal from '../../core/util/Signal';
 export default class Entity extends TileObject {
-    constructor(world, id, name) {
+    constructor(world, id, name, shiftManager) {
         super(world, id, name);
+        this.shiftManager = shiftManager;
 
         this.arrow = {
             ARROW_LEFT: new Sprite2D(new Global().getResource("ARROW_LEFT")),
@@ -17,7 +19,7 @@ export default class Entity extends TileObject {
 
         this.texture = new Sprite2D(new Global().getResource(id));
         this.world = world;
-
+        this.onDie = new Signal();
         this.inventory = new ItemStackContainer(16)
         this.life = 100;
 
@@ -38,18 +40,46 @@ export default class Entity extends TileObject {
         this.currentChunk = this.getCurrentChunk();
     }
 
+    hurt(amount=1) {
+        const r = this.life - amount;
+        if (r > 0) {
+            this.life = r;
+            return "hurt";
+        } else {
+            this.onDie.emit(this);
+            this.world.removeEntity(this);
+            this.shiftManager.removeUser(this);
+            return "dead";
+        }
+    }
 
+    getItemsOf(someClass) {        
+        const content = [
+            ...this.inventory.getContent(),
+        ];
+        
+        const w = content.filter((stack) => stack != null && stack.item instanceof someClass);
+        return w;
+    }
 
+    /**
+     * Check the tile id isnt included in OBSTACLES from constants.js 
+     * @param {*} x 
+     * @param {*} y 
+     * @returns a boolean
+     */
     _canMove(x, y) {
+        if (x<0) return false;
+        if (y<0) return false;
         let chunk = this.world.getChunkAt(x, y);
 
         let localX = x - (chunk.x * chunk.size);
         let localY = y - (chunk.y * chunk.size);
 
+        //console.log(localX, localY);
 
 
-        let currentTileId = chunk.getTile(localY, localX);
-
+        let currentTileId = chunk.getTileId(localX, localY);
         return !OBSTACLE.includes(currentTileId);
     }
 
@@ -129,8 +159,7 @@ export default class Entity extends TileObject {
     }
 
     getLocalChunkCoords() {
-        let p = Util.getPosNoSize(this.x, this.y);
-        const pos = Util.posGlobalToChunkLocal(p.x, p.y, this.currentChunk);
+        const pos = Util.posGlobalToChunkLocal(this.x, this.y, this.currentChunk);
           
         return {x:pos.x, y: pos.y};
     }

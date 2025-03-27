@@ -1,3 +1,5 @@
+import EngineGlobal from "../EngineGlobal";
+
 export default class Item {
     constructor(id, name, description = "") {
         if (typeof description !== "string") {
@@ -7,6 +9,10 @@ export default class Item {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    setup() {
+
     }
 
     setDurability(value) {  

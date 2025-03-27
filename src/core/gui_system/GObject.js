@@ -14,6 +14,18 @@ export default class GObject {
         return this;
     }
 
+    
+    pushContent(...content) {
+        this.content.push(content);
+        return this;
+    }
+
+    addObject(obj) {
+        this.content.push(obj);
+        return this;
+    }
+
+
     setId(id) {
         this.id=id;
         return this;
@@ -23,6 +35,11 @@ export default class GObject {
         return this.content.find(c => c.id === id);
     }
 
+    hasObjectWithId(id) {
+        return this.content.findIndex(c => c.id === id) != -1;
+    }
+
+
     draw() {
         this.content.forEach(c=>{
             c.draw();
@@ -30,7 +47,7 @@ export default class GObject {
     }
 
     update() {
-
+        
     }
 
 
